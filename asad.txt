@@ -1,0 +1,326 @@
+Web Project:
+
+Forms with USDT Tether Cryptocurrency Payment
+
+Objective: Implement two forms that require a USDT payment upon 
+submission to save data to a MySQL database.
+
+Two Forms:
+
+Note: Both forms will be exactly the same, with identical fields. 
+Only the payment amount will differ.
+
+Form 1: Payment of 1 USDT
+Form 2: Payment of 3 USDT
+
+Crypto Wallet Integration: 
+Upon form submission, the user's wallet will be activated to make 
+the USDT payment. This should be compatible with any wallet installed 
+for crypto payments on the Binance Smart Chain network, such as MetaMask, 
+Trust Wallet, Binance Wallet, and others that support payments on this network.
+
+Smart Contracts: 
+
+Smart contracts will be used to manage the payment process. 
+The client will provide the wallets to be integrated into the contract.
+
+Is it possible to divide the main wallet for each form 
+(e.g., the one for 1 USDT) into several percentages and 
+distribute them to different wallets?
+
+MySQL Database: Form data will only be saved to a MySQL database 
+if the payment is successful. If the payment fails, the data will 
+not be saved under any circumstances. Upon successful payment, 
+the user will be redirected to an informational page. The connection 
+to the MySQL database to save the form data will only occur after 
+a successful payment.
+
+Data Visualization: A page called "Tables" will display information 
+from the first 50 rows of the database, with only specific columns 
+selected. There will be two options on this page, one for each form.
+
+Existing Frontend: 
+The website already has HTML and CSS; only backend development 
+is required. The website is called www.alcavenca.com and is already live on the web.
+
+Technologies:
+
+Backend: Programming language of the developer's choice, with the ability to interact with smart contracts and a MySQL database.
+Hosting: Hostinger.com
+
+Add COLUMNitional Information:
+
+The client will provide the wallets for the smart contracts.
+The system must handle potential payment errors and notify the user.
+Ensure the security and integrity of data and transactions
+
+
+
+
+Logros
+Concretados
+Fase 1
+Fase 2
+Por llamar
+1er Llamado
+Total
+Pendientes
+Salidas
+Ingresos
+Zona 1
+Zona 2
+Total Zona 1
+Total Zona 2
+Contratación
+Contratación 1
+Contratación 2
+Conflictos
+Conflictos 1
+Conflictos 2
+Capacitación
+Capacitación 1
+Capacitación 2
+Mayoristas
+Mayorista 1
+Mayorista 2
+Minoristas
+Minorista 1
+Minorista 2
+Comisionistas
+Comisionista 1
+Comisionista 2
+Distribución
+Zona 1
+Zona 2
+Enlaces
+Enlace 1
+Enlace 2
+Productos
+1er Nivel
+2do Nivel
+Pronóstico de Ventas
+Pronóstico 1
+Pronóstico 2
+Adquisición de Productos
+Adquisición 1
+Adquisición 2
+Inventario
+Inventario 1
+Inventario 2
+Almacenamiento
+Almacenamiento 1
+Almacenamiento 2
+Conservación y preservación de los productos 1
+Conservación y preservación de los productos 2
+Conservación 1
+Conservación 2
+Picking
+
+
+
+ALTER TABLE formdata
+ADD COLUMN Logros VARCHAR(255),
+ADD COLUMN Concretados INT,
+ADD COLUMN Total INT,
+ADD COLUMN Pendientes INT,
+ADD COLUMN Salidas INT,
+ADD COLUMN Ingresos INT,
+ADD COLUMN Zona_1 INT,
+ADD COLUMN Zona_2 INT,
+ADD COLUMN Total_Zona_1 INT,
+ADD COLUMN Total_Zona_2 INT,
+ADD COLUMN Contratacion INT,
+ADD COLUMN Contratacion_1 INT,
+ADD COLUMN Contratacion_2 INT,
+ADD COLUMN Conflictos INT,
+ADD COLUMN Conflictos_1 INT,
+ADD COLUMN Conflictos_2 INT,
+ADD COLUMN Capacitacion INT,
+ADD COLUMN Capacitacion_1 INT,
+ADD COLUMN Capacitacion_2 INT,
+ADD COLUMN Mayoristas VARCHAR(255),
+ADD COLUMN Mayorista_1 VARCHAR(255),
+ADD COLUMN Mayorista_2 VARCHAR(255),
+ADD COLUMN Minoristas VARCHAR(255),
+ADD COLUMN Minorista_1 VARCHAR(255),
+ADD COLUMN Minorista_2 VARCHAR(255),
+ADD COLUMN Comisionistas VARCHAR(255),
+ADD COLUMN Comisionista_1 VARCHAR(255),
+ADD COLUMN Comisionista_2 VARCHAR(255),
+ADD COLUMN Distribución VARCHAR(255),
+ADD COLUMN Zona_1 INT,
+ADD COLUMN Zona_2 INT,
+ADD COLUMN Enlaces VARCHAR(255),
+ADD COLUMN Enlace_1 VARCHAR(255),
+ADD COLUMN Enlace_2 VARCHAR(255),
+ADD COLUMN Productos VARCHAR(255),
+ADD COLUMN 1er_Nivel VARCHAR(255),
+ADD COLUMN 2do_Nivel VARCHAR(255),
+ADD COLUMN Pronóstico_de_Ventas VARCHAR(255),
+ADD COLUMN Pronóstico_1 INT,
+ADD COLUMN Pronóstico_2 INT,
+ADD COLUMN Adquisición_de_Productos VARCHAR(255),
+ADD COLUMN Adquisición_1 INT,
+ADD COLUMN Adquisición_2 INT,
+ADD COLUMN Inventario VARCHAR(255),
+ADD COLUMN Inventario_1 INT,
+ADD COLUMN Inventario_2 INT,
+ADD COLUMN Almacenamiento VARCHAR(255),
+ADD COLUMN Almacenamiento_1 INT,
+ADD COLUMN Almacenamiento_2 INT,
+ADD COLUMN Conservación_y_preservación_de_los_productos_1 VARCHAR(255),
+ADD COLUMN Conservación_y_preservación_de_los_productos_2 VARCHAR(255),
+ADD COLUMN Conservación VARCHAR(255),
+ADD COLUMN Conservación_2 VARCHAR(255),
+ADD COLUMN Picking VARCHAR(255);
+
+
+
+app.post("/saveFormData", (req, res) => {
+    const {
+      position,
+      points,
+      name,
+      country,
+      wallet,
+      paymentAmount,
+      Logros,
+      Concretados,
+      Total,
+      Pendientes,
+      Salidas,
+      Ingresos,
+      Conflictos_2,
+      Capacitacion,
+      Capacitacion_1,
+      Capacitacion_2,
+      Mayoristas,
+      Mayorista_1,
+      Mayorista_2,
+      Minoristas,
+      Minorista_1,
+      Minorista_2,
+      Comisionistas,
+      Comisionista_1,
+      Comisionista_2,
+      Distribución,
+      Zona_1,
+      Zona_2,
+      Enlaces,
+      Enlace_1,
+      Enlace_2,
+      Productos,
+      er_Nivel,
+      do_Nivel,
+      Pronóstico_de_Ventas,
+      Pronóstico_1,
+      Pronóstico_2,
+      Adquisición_de_Productos,
+      Adquisición_1,
+      Adquisición_2,
+      Inventario,
+      Inventario_1,
+      Inventario_2,
+      Almacenamiento,
+      Almacenamiento_1,
+      Almacenamiento_2,
+      Conservación_y_preservación_de_los_productos_1,
+      Conservación_y_preservación_de_los_productos_2,
+      Conservación,
+      Conservación_2,
+      Picking,
+      Metas_alcanzar_org1,
+      Seleccionar1_org1,
+      Seleccionar2_org1,
+      Seleccionar3_org1,
+      Seleccionar4_org1,
+      Imposiciones_org1,
+      Metas_alcanzar_org2,
+      Seleccionar1_org2,
+      Seleccionar2_org2,
+      Seleccionar3_org2,
+      Seleccionar4_org2,
+      Imposiciones_org2,
+      Metas_alcanzar_org3,
+      Seleccionar1_org3,
+      Seleccionar2_org3,
+      Seleccionar3_org3,
+      Seleccionar4_org3,
+      Imposiciones_org3,
+      Metas_alcanzar_org4,
+      Seleccionar1_org4,
+      Seleccionar2_org4,
+      Seleccionar3_org4,
+      Seleccionar4_org4,
+      Imposiciones_org4,
+      formtype,
+      Control_de_Gestión,
+      ControlGestión1,
+      ControlGestión2,
+      ControlGestión3,
+      ControlGestión4,
+      Asistencia_a_la_dirección,
+      Estructura_contable,
+      selection_Estructura_1,
+      selection_Estructura_2,
+      selection_Estructura_3,
+      selection_Estructura_4,
+      Coordinación_y_optimización,
+    } = req.body;
+  
+    // Construct the SQL query for savetable
+    const savetableColumns = Object.keys(req.body).join(', ');
+    const savetablePlaceholders = Object.keys(req.body).map(() => '?').join(', ');
+    const savetableSql = `INSERT INTO savetable (${savetableColumns}) VALUES (${savetablePlaceholders})`;
+  
+    // Construct the values array for savetable
+    const savetableValues = Object.values(req.body);
+  
+    // Construct the SQL query for managementdata
+    const managementdataColumns = 'Control_de_Gestión, ControlGestión1, ControlGestión2, ControlGestión3, ControlGestión4, Asistencia_a_la_dirección, Estructura_contable, selection_Estructura_1, selection_Estructura_2, selection_Estructura_3, selection_Estructura_4, Coordinación_y_optimización';
+    const managementdataPlaceholders = '?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?';
+    const managementdataSql = `INSERT INTO managementdata (${managementdataColumns}) VALUES (${managementdataPlaceholders})`;
+  
+    // Construct the values array for managementdata
+    const managementdataValues = [
+      Control_de_Gestión,
+      ControlGestión1,
+      ControlGestión2,
+      ControlGestión3,
+      ControlGestión4,
+      Asistencia_a_la_dirección,
+      Estructura_contable,
+      selection_Estructura_1,
+      selection_Estructura_2,
+      selection_Estructura_3,
+      selection_Estructura_4,
+      Coordinación_y_optimización
+    ];
+  
+    // Execute both queries
+    db.beginTransaction(function(err) {
+      if (err) { throw err; }
+      db.query(savetableSql, savetableValues, function (error, savetableResult) {
+        if (error) {
+          db.rollback(function() {
+            res.status(500).json({ error: error });
+          });
+        }
+        db.query(managementdataSql, managementdataValues, function (error, managementdataResult) {
+          if (error) {
+            db.rollback(function() {
+              res.status(500).json({ error: error });
+            });
+          }
+          db.commit(function(err) {
+            if (err) {
+              db.rollback(function() {
+                res.status(500).json({ error: err });
+              });
+            }
+            res.status(200).json({ message: "Form data saved successfully" });
+          });
+        });
+      });
+    });
+  });

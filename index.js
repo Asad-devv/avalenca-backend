@@ -6,14 +6,16 @@ const app = express();
 const port = 3001;
 
 // MySQL database connection configuration
+// MySQL database connection configuration
 const db = mysql.createPool({
-  host: "127.0.0.1",
-  user: "root",
-  password: "asad1234",
-  database: "user",
+  host: "193.203.175.59", // Use the MySQL server hostname or IP address
+  user: "u199104033_usdt3", // Your MySQL username
+  password: "Alcavenca123", // Your MySQL password
+  database: "u199104033_usdt3", // Your MySQL database name
 });
 
 // Connect to MySQL database
+
 db.getConnection((err, connection) => {
   if (err) {
     console.error("Error connecting to MySQL:", err);
@@ -249,33 +251,35 @@ app.get("/", (req, res) => {
 });
 
 app.post('/create-columns', (req, res) => {
-    // Get the payload from the request
-    const payload = req.body;
-  
-    // Function to create columns dynamically based on payload keys
-    function createColumns(payload) {
-      let columnDefinitions = '';
-      for (const key in payload) {
-        if (payload.hasOwnProperty(key)) {
-          columnDefinitions += `${key} VARCHAR(255),`;
-        }
+  // Get the payload from the request
+  const payload = req.body;
+
+  // Function to create columns dynamically based on payload keys
+  function createColumns(payload) {
+    let columnDefinitions = '';
+    for (const key in payload) {
+      if (payload.hasOwnProperty(key)) {
+        columnDefinitions += `${key} VARCHAR(255),`;
       }
-      columnDefinitions = columnDefinitions.slice(0, -1); // Remove trailing comma
-      const sql = `ALTER TABLE managementdata ADD COLUMN (${columnDefinitions})`;
-      return sql;
     }
-  
-    // Get SQL query to create columns
-    const createTableSQL = createColumns(payload);
-  
-    // Execute the query to alter the table structure
-    db.query(createTableSQL, (error, results, fields) => {
-      if (error) {
-        console.error('Error executing query:', error);
-        res.status(500).json({ error: 'Error creating columns' });
-        return;
-      }
-      console.log('Table structure altered successfully');
-      res.status(200).json({ message: 'Columns created successfully' });
-    });
+    columnDefinitions = columnDefinitions.slice(0, -1); // Remove trailing comma
+    const sql = `ALTER TABLE formdata ADD (${columnDefinitions})`;
+    return sql;
+  }
+
+  // Get SQL query to create columns
+  const createTableSQL = createColumns(payload);
+
+  // Execute the query to alter the table structure
+  pool.query(createTableSQL, (error, results, fields) => {
+    if (error) {
+      console.error('Error executing query:', error);
+      res.status(500).json({ error: 'Error creating columns' });
+      return;
+    }
+    console.log('Table structure altered successfully');
+    
+ 
   });
+});
+
