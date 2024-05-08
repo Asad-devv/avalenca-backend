@@ -3,14 +3,15 @@ const mysql = require("mysql2/promise"); // Import mysql2/promise for promise-ba
 const bodyParser = require("body-parser");
 
 const app = express();
-const port = 3001;
+const port = 3002;
 
 // MySQL database connection configuration
 const db2 = mysql.createPool({
-  host: "srv1198.hstgr.io", // Use the MySQL server hostname or IP address
-  user: "u199104033_usdt3", // Your MySQL username
-  password: "Alcavenca123", // Your MySQL password
-  database: "u199104033_usdt3", // Your MySQL database name
+  host: "217.196.50.153", // Use the MySQL server hostname or IP address
+  user: "admin3", // Your MySQL username
+  password: "admin3",
+  
+  database: "usdt1", // Your MySQL database name
 });
 const db = mysql.createPool({
   host: "srv1198.hstgr.io", // Use the MySQL server hostname or IP address
