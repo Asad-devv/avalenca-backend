@@ -6,23 +6,22 @@ const app = express();
 const port = 3002;
 
 // MySQL database connection configuration
-const db2 = mysql.createPool({
+const usdt3 = mysql.createPool({
   host: "217.196.50.153", // Use the MySQL server hostname or IP address
   user: "admin3", // Your MySQL username
   password: "admin3",
-  
   database: "usdt1", // Your MySQL database name
 });
-const db = mysql.createPool({
-  host: "srv1198.hstgr.io", // Use the MySQL server hostname or IP address
-  user: "u199104033_usdt1", // Your MySQL username
-  password: "Alcavenca123", // Your MySQL password
-  database: "u199104033_usdt1", // Your MySQL database name
+const usdt1 = mysql.createPool({
+  host: "217.196.50.153", // Use the MySQL server hostname or IP address
+  user: "admin3", // Your MySQL username
+  password: "admin3", // Your MySQL password
+  database: "usdt1", // Your MySQL database name
 });
 
 // Connect to MySQL database
 
-db.getConnection((err, connection) => {
+usdt1.getConnection((err, connection) => {
   if (err) {
     console.error(" Error connecting to MySQL:", err);
     process.exit(1); // Exit the application if the connection fails
@@ -56,7 +55,7 @@ app.post('/saveData', async (req, res) => {
             city,
             email,
             wallet,
-            formtype,
+             
             paymentAmount,
             Logros,
             Concretados_fase_1,
@@ -109,16 +108,16 @@ app.post('/saveData', async (req, res) => {
         } = req.body.formData;
 
         // Insert formData fields into the formdata table
-        await db.query(
+        await usdt1.query(
             "INSERT INTO formdata " +
-            "(name, country, city, email, wallet, formtype, paymentAmount, Logros, Concretados_fase_1, fase_1, Concretados, fase_2, Concretados_fase_2, " +
+            "(name, country, city, email, wallet,   paymentAmount, Logros, Concretados_fase_1, fase_1, Concretados, fase_2, Concretados_fase_2, " +
             "por_llamar1, er_llamado1, por_llamar2, llamado_2do, Total_Administrativo, Pendientes, Salidas, Ingresos, zona_1, zona_2, total_zona_1, total_zona_2, " +
             "Contratacion_1, Contratacion_2, Conflictos_1, Conflictos_2, Capacitacion_1, Capacitacion_2, Mayorista_1, Mayorista_2, Minorista_1, Minorista_2, " +
             "Comisionista_1, Comisionista_2, Dist_Zona_1, Dist_Zona_2, Enlace_1, Enlace_2, prod_er_Nivel1, prod_do_Nivel2, Pronóstico_1, Pronóstico_2, " +
             "Adquisición_Productos_1, Adquisición_Productos_2, Inventario_1, Inventario_2, Almacenamiento_1, Almacenamiento_2, Conservación_y_preservación_de_los_productos_1, " +
             "Conservación_y_preservación_de_los_productos_2, Picking_productos_1, Picking_productos_2) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            [name, country, city, email, wallet, formtype, paymentAmount, Logros, Concretados_fase_1, fase_1, Concretados, fase_2, Concretados_fase_2,
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            [name, country, city, email, wallet,   paymentAmount, Logros, Concretados_fase_1, fase_1, Concretados, fase_2, Concretados_fase_2,
             por_llamar1, er_llamado1, por_llamar2, llamado_2do, Total_Administrativo, Pendientes, Salidas, Ingresos, zona_1, zona_2, total_zona_1, total_zona_2,
             Contratacion_1, Contratacion_2, Conflictos_1, Conflictos_2, Capacitacion_1, Capacitacion_2, Mayorista_1, Mayorista_2, Minorista_1, Minorista_2,
             Comisionista_1, Comisionista_2, Dist_Zona_1, Dist_Zona_2, Enlace_1, Enlace_2, prod_er_Nivel1, prod_do_Nivel2, Pronóstico_1, Pronóstico_2,
@@ -127,16 +126,16 @@ app.post('/saveData', async (req, res) => {
         );
         
 
-        await db2.query(
+        await usdt3.query(
           "INSERT INTO formdata " +
-          "(name, country, city, email, wallet, formtype, paymentAmount, Logros, Concretados_fase_1, fase_1, Concretados, fase_2, Concretados_fase_2, " +
+          "(name, country, city, email, wallet,   paymentAmount, Logros, Concretados_fase_1, fase_1, Concretados, fase_2, Concretados_fase_2, " +
           "por_llamar1, er_llamado1, por_llamar2, llamado_2do, Total_Administrativo, Pendientes, Salidas, Ingresos, zona_1, zona_2, total_zona_1, total_zona_2, " +
           "Contratacion_1, Contratacion_2, Conflictos_1, Conflictos_2, Capacitacion_1, Capacitacion_2, Mayorista_1, Mayorista_2, Minorista_1, Minorista_2, " +
           "Comisionista_1, Comisionista_2, Dist_Zona_1, Dist_Zona_2, Enlace_1, Enlace_2, prod_er_Nivel1, prod_do_Nivel2, Pronóstico_1, Pronóstico_2, " +
           "Adquisición_Productos_1, Adquisición_Productos_2, Inventario_1, Inventario_2, Almacenamiento_1, Almacenamiento_2, Conservación_y_preservación_de_los_productos_1, " +
           "Conservación_y_preservación_de_los_productos_2, Picking_productos_1, Picking_productos_2) " +
-          "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-          [name, country, city, email, wallet, formtype, paymentAmount, Logros, Concretados_fase_1, fase_1, Concretados, fase_2, Concretados_fase_2,
+          "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+          [name, country, city, email, wallet,   paymentAmount, Logros, Concretados_fase_1, fase_1, Concretados, fase_2, Concretados_fase_2,
           por_llamar1, er_llamado1, por_llamar2, llamado_2do, Total_Administrativo, Pendientes, Salidas, Ingresos, zona_1, zona_2, total_zona_1, total_zona_2,
           Contratacion_1, Contratacion_2, Conflictos_1, Conflictos_2, Capacitacion_1, Capacitacion_2, Mayorista_1, Mayorista_2, Minorista_1, Minorista_2,
           Comisionista_1, Comisionista_2, Dist_Zona_1, Dist_Zona_2, Enlace_1, Enlace_2, prod_er_Nivel1, prod_do_Nivel2, Pronóstico_1, Pronóstico_2,
@@ -201,7 +200,7 @@ app.post('/saveData', async (req, res) => {
         } = req.body.mgmtData;
 
         // Insert mgmtData fields into the managementdata table
-        await db.query(
+        await usdt1.query(
             "INSERT INTO managementdata " +
             "(Metas_alcanzar_org1, Seleccionar1_org1, Seleccionar2_org1, Seleccionar3_org1, Seleccionar4_org1, Imposiciones_org1, " +
             "Metas_alcanzar_org2, Seleccionar1_org2, Seleccionar2_org2, Seleccionar3_org2, Seleccionar4_org2, Imposiciones_org2, " +
@@ -226,7 +225,7 @@ app.post('/saveData', async (req, res) => {
             Dirección_Generalestrategias_5, Dirección_Generalestrategias_6, politicas_nuevas_Seleccionar]
         );
 
-        await db2.query(
+        await usdt3.query(
           "INSERT INTO managementdata " +
           "(Metas_alcanzar_org1, Seleccionar1_org1, Seleccionar2_org1, Seleccionar3_org1, Seleccionar4_org1, Imposiciones_org1, " +
           "Metas_alcanzar_org2, Seleccionar1_org2, Seleccionar2_org2, Seleccionar3_org2, Seleccionar4_org2, Imposiciones_org2, " +
@@ -265,20 +264,20 @@ app.get("/tables", async (req, res) => {
     const formType = req.query.formType; // Extract formType from query parameters
 
     let sql;
-    let dbConnection;
+    let usdt1Connection;
     if (formType === "1") {
       sql =
-        "SELECT name, country, wallet, paymentAmount FROM db1.formdata WHERE formtype ='form1' LIMIT 50";
-      dbConnection = db;
+        "SELECT name, country, wallet, paymentAmount FROM usdt11.formdata WHERE paymentAmount = 1 LIMIT 50";
+      usdt1Connection = usdt1;
     } else if (formType === "3") {
       sql =
-        "SELECT name, country, wallet, paymentAmount FROM db2.formdata WHERE formtype ='form2' LIMIT 50";
-      dbConnection = db2;
+        "SELECT name, country, wallet, paymentAmount FROM usdt3.formdata WHERE paymentAmount = 3 LIMIT 50";
+      usdt1Connection = usdt3;
     } else {
       throw new Error("Invalid form type");
     }
 
-    const [results] = await dbConnection.query(sql);
+    const [results] = await usdt1Connection.query(sql);
     res.status(200).json(results);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -324,7 +323,7 @@ app.post('/create-columns', async (req, res) => {
 
   try {
     // Execute the query to alter the table structure
-    await db.query(createTableSQL);
+    await usdt1.query(createTableSQL);
     console.log('Table structure altered successfully');
     res.status(200).json({ message: 'Columns created successfully' });
   } catch (error) {
