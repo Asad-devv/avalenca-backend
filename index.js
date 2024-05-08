@@ -124,7 +124,6 @@ app.post('/saveData', async (req, res) => {
             Adquisición_Productos_1, Adquisición_Productos_2, Inventario_1, Inventario_2, Almacenamiento_1, Almacenamiento_2, Conservación_y_preservación_de_los_productos_1,
             Conservación_y_preservación_de_los_productos_2, Picking_productos_1, Picking_productos_2]
         );
-        
 
         await usdt3.query(
           "INSERT INTO formdata " +
@@ -264,20 +263,20 @@ app.get("/tables", async (req, res) => {
     const formType = req.query.formType; // Extract formType from query parameters
 
     let sql;
-    let usdt1Connection;
+    let connection;
     if (formType === "1") {
       sql =
-        "SELECT name, country, wallet, paymentAmount FROM usdt11.formdata WHERE paymentAmount = 1 LIMIT 50";
-      usdt1Connection = usdt1;
+        "SELECT name, country, wallet, paymentAmount FROM usdt1.formdata WHERE paymentAmount = 1 LIMIT 50";
+      connection = usdt1;
     } else if (formType === "3") {
       sql =
         "SELECT name, country, wallet, paymentAmount FROM usdt3.formdata WHERE paymentAmount = 3 LIMIT 50";
-      usdt1Connection = usdt3;
+      connection = usdt3;
     } else {
       throw new Error("Invalid form type");
     }
 
-    const [results] = await usdt1Connection.query(sql);
+    const [results] = await connection.query(sql);
     res.status(200).json(results);
   } catch (error) {
     res.status(500).json({ error: error.message });
