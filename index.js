@@ -1,9 +1,21 @@
 const express = require("express");
 const mysql = require("mysql2/promise"); // Import mysql2/promise for promise-based queries
 const bodyParser = require("body-parser");
+var cors = require('cors')
 
 const app = express();
 const port = 3002;
+app.use(cors())
+
+
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+
+  next();
+});
 
 // MySQL database connection configuration
 const usdt3 = mysql.createPool({
@@ -34,12 +46,7 @@ usdt1.getConnection((err, connection) => {
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  next();
-});
+
 
 app.use(express.json());
 
@@ -49,13 +56,13 @@ app.use(express.json());
 app.post('/saveData', async (req, res) => {
     try {
         // Destructure formData fields
+
         const {
             name,
             country,
             city,
             email,
             wallet,
-             
             paymentAmount,
             Logros,
             Concretados_fase_1,
@@ -106,7 +113,6 @@ app.post('/saveData', async (req, res) => {
             Picking_productos_1,
             Picking_productos_2
         } = req.body.formData;
-
         // Insert formData fields into the formdata table
         await usdt1.query(
             "INSERT INTO formdata " +
