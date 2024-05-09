@@ -22,7 +22,7 @@ const usdt3 = mysql.createPool({
   host: "217.196.50.153", // Use the MySQL server hostname or IP address
   user: "admin3", // Your MySQL username
   password: "admin3",
-  database: "usdt1", // Your MySQL database name
+  database: "usdt3", // Your MySQL database name
 });
 const usdt1 = mysql.createPool({
   host: "217.196.50.153", // Use the MySQL server hostname or IP address
@@ -175,7 +175,7 @@ app.post('/saveData', async (req, res) => {
         // Execute queries for   1
         // Insert formData fields into the formdata table for  formtype 1
 
-
+console.log(formData);
       if ( formtype == "form1") {
         
         await usdt1.query(
