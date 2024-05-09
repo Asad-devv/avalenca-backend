@@ -54,158 +54,148 @@ app.use(express.json());
 
 // Route to display information from the database based on form type
 app.post('/saveData', async (req, res) => {
-    try {
-        // Destructure formData fields
+  try {
+      const { formData } = req.body;
+      
+      
+      // Destructure formData fields
+      const {
+          formtype
+      } = formData;
 
-        const {
-            name,
-            country,
-            city,
-            email,
-            wallet,
-            paymentAmount,
-            Logros,
-            Concretados_fase_1,
-            fase_1,
-            Concretados,
-            fase_2,
-            Concretados_fase_2,
-            por_llamar1,
-            er_llamado1,
-            por_llamar2,
-            llamado_2do,
-            Total_Administrativo,
-            Pendientes,
-            Salidas,
-            Ingresos,
-            zona_1,
-            zona_2,
-            total_zona_1,
-            total_zona_2,
-            Contratacion_1,
-            Contratacion_2,
-            Conflictos_1,
-            Conflictos_2,
-            Capacitacion_1,
-            Capacitacion_2,
-            Mayorista_1,
-            Mayorista_2,
-            Minorista_1,
-            Minorista_2,
-            Comisionista_1,
-            Comisionista_2,
-            Dist_Zona_1,
-            Dist_Zona_2,
-            Enlace_1,
-            Enlace_2,
-            prod_er_Nivel1,
-            prod_do_Nivel2,
-            Pronóstico_1,
-            Pronóstico_2,
-            Adquisición_Productos_1,
-            Adquisición_Productos_2,
-            Inventario_1,
-            Inventario_2,
-            Almacenamiento_1,
-            Almacenamiento_2,
-            Conservación_y_preservación_de_los_productos_1,
-            Conservación_y_preservación_de_los_productos_2,
-            Picking_productos_1,
-            Picking_productos_2
-        } = req.body.formData;
-        // Insert formData fields into the formdata table
+      const {
+        name,
+        country,
+        email,
+        wallet,
+        paymentAmount,
+        Logros,
+        Concretados_fase_1,
+        fase_1,
+        Concretados,
+        fase_2,
+        Concretados_fase_2,
+        por_llamar1,
+        er_llamado1,
+        por_llamar2,
+        llamado_2do,
+        Total_Administrativo,
+        Pendientes,
+        Salidas,
+        Ingresos,
+        zona_1,
+        zona_2,
+        total_zona_1,
+        total_zona_2,
+        Contratacion_1,
+        Contratacion_2,
+        Conflictos_1,
+        Conflictos_2,
+        Capacitacion_1,
+        Capacitacion_2,
+        Mayorista_1,
+        Mayorista_2,
+        Minorista_1,
+        Minorista_2,
+        Comisionista_1,
+        Comisionista_2,
+        Dist_Zona_1,
+        Dist_Zona_2,
+        Enlace_1,
+        Enlace_2,
+        prod_er_Nivel1,
+        prod_do_Nivel2,
+        Pronóstico_1,
+        Pronóstico_2,
+        Adquisición_Productos_1,
+        Adquisición_Productos_2,
+        Inventario_1,
+        Inventario_2,
+        Almacenamiento_1,
+        Almacenamiento_2,
+        Conservación_y_preservación_de_los_productos_1,
+        Conservación_y_preservación_de_los_productos_2,
+        Picking_productos_1,
+        Picking_productos_2
+    } = req.body.formData;
+    const {
+      Metas_alcanzar_org1,
+      Seleccionar1_org1,
+      Seleccionar2_org1,
+      Seleccionar3_org1,
+      Seleccionar4_org1,
+      Imposiciones_org1,
+      Metas_alcanzar_org2,
+      Seleccionar1_org2,
+      Seleccionar2_org2,
+      Seleccionar3_org2,
+      Seleccionar4_org2,
+      Imposiciones_org2,
+      Metas_alcanzar_org3,
+      Seleccionar1_org3,
+      Seleccionar2_org3,
+      Seleccionar3_org3,
+      Seleccionar4_org3,
+      Imposiciones_org3,
+      Metas_alcanzar_org4,
+      Seleccionar1_org4,
+      Seleccionar2_org4,
+      Seleccionar3_org4,
+      Seleccionar4_org4,
+      Imposiciones_org4,
+      Control_de_Gestión,
+      ControlGestión1,
+      ControlGestión2,
+      ControlGestión3,
+      ControlGestión4,
+      Asistencia_a_la_dirección,
+      Estructura_contable,
+      selection_Estructura_1,
+      selection_Estructura_2,
+      selection_Estructura_3,
+      selection_Estructura_4,
+      Coordinación_y_optimización,
+      transacciones_Seleccionar,
+      Servicio_al_Cliente_1,
+      Servicio_al_Cliente_2,
+      Servicio_al_Cliente_3,
+      Servicio_al_Cliente_4,
+      Servicio_al_Cliente_5,
+      Servicio_al_Cliente_6,
+      problemas_resueltos_Seleccionar,
+      Reuniones_con_zonas_Seleccionar,
+      Dirección_Generalestrategias_1,
+      Dirección_Generalestrategias_2,
+      Dirección_Generalestrategias_3,
+      Dirección_Generalestrategias_4,
+      Dirección_Generalestrategias_5,
+      Dirección_Generalestrategias_6,
+      politicas_nuevas_Seleccionar
+  } = req.body.mgmtData;
+        // Execute queries for   1
+        // Insert formData fields into the formdata table for  formtype 1
+
+
+      if ( formtype == "form1") {
+        
         await usdt1.query(
-            "INSERT INTO formdata " +
-            "(name, country, city, email, wallet,   paymentAmount, Logros, Concretados_fase_1, fase_1, Concretados, fase_2, Concretados_fase_2, " +
-            "por_llamar1, er_llamado1, por_llamar2, llamado_2do, Total_Administrativo, Pendientes, Salidas, Ingresos, zona_1, zona_2, total_zona_1, total_zona_2, " +
-            "Contratacion_1, Contratacion_2, Conflictos_1, Conflictos_2, Capacitacion_1, Capacitacion_2, Mayorista_1, Mayorista_2, Minorista_1, Minorista_2, " +
-            "Comisionista_1, Comisionista_2, Dist_Zona_1, Dist_Zona_2, Enlace_1, Enlace_2, prod_er_Nivel1, prod_do_Nivel2, Pronóstico_1, Pronóstico_2, " +
-            "Adquisición_Productos_1, Adquisición_Productos_2, Inventario_1, Inventario_2, Almacenamiento_1, Almacenamiento_2, Conservación_y_preservación_de_los_productos_1, " +
-            "Conservación_y_preservación_de_los_productos_2, Picking_productos_1, Picking_productos_2) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            [name, country, city, email, wallet,   paymentAmount, Logros, Concretados_fase_1, fase_1, Concretados, fase_2, Concretados_fase_2,
-            por_llamar1, er_llamado1, por_llamar2, llamado_2do, Total_Administrativo, Pendientes, Salidas, Ingresos, zona_1, zona_2, total_zona_1, total_zona_2,
-            Contratacion_1, Contratacion_2, Conflictos_1, Conflictos_2, Capacitacion_1, Capacitacion_2, Mayorista_1, Mayorista_2, Minorista_1, Minorista_2,
-            Comisionista_1, Comisionista_2, Dist_Zona_1, Dist_Zona_2, Enlace_1, Enlace_2, prod_er_Nivel1, prod_do_Nivel2, Pronóstico_1, Pronóstico_2,
-            Adquisición_Productos_1, Adquisición_Productos_2, Inventario_1, Inventario_2, Almacenamiento_1, Almacenamiento_2, Conservación_y_preservación_de_los_productos_1,
-            Conservación_y_preservación_de_los_productos_2, Picking_productos_1, Picking_productos_2]
-        );
-
-        await usdt3.query(
           "INSERT INTO formdata " +
-          "(name, country, city, email, wallet,   paymentAmount, Logros, Concretados_fase_1, fase_1, Concretados, fase_2, Concretados_fase_2, " +
+          "(name, country, email, wallet, paymentAmount, Logros, Concretados_fase_1, fase_1, Concretados, fase_2, Concretados_fase_2, " +
           "por_llamar1, er_llamado1, por_llamar2, llamado_2do, Total_Administrativo, Pendientes, Salidas, Ingresos, zona_1, zona_2, total_zona_1, total_zona_2, " +
           "Contratacion_1, Contratacion_2, Conflictos_1, Conflictos_2, Capacitacion_1, Capacitacion_2, Mayorista_1, Mayorista_2, Minorista_1, Minorista_2, " +
           "Comisionista_1, Comisionista_2, Dist_Zona_1, Dist_Zona_2, Enlace_1, Enlace_2, prod_er_Nivel1, prod_do_Nivel2, Pronóstico_1, Pronóstico_2, " +
           "Adquisición_Productos_1, Adquisición_Productos_2, Inventario_1, Inventario_2, Almacenamiento_1, Almacenamiento_2, Conservación_y_preservación_de_los_productos_1, " +
           "Conservación_y_preservación_de_los_productos_2, Picking_productos_1, Picking_productos_2) " +
-          "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-          [name, country, city, email, wallet,   paymentAmount, Logros, Concretados_fase_1, fase_1, Concretados, fase_2, Concretados_fase_2,
+          "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?, ?)",
+          [name, country, email, wallet, paymentAmount, Logros, Concretados_fase_1, fase_1, Concretados, fase_2, Concretados_fase_2,
           por_llamar1, er_llamado1, por_llamar2, llamado_2do, Total_Administrativo, Pendientes, Salidas, Ingresos, zona_1, zona_2, total_zona_1, total_zona_2,
           Contratacion_1, Contratacion_2, Conflictos_1, Conflictos_2, Capacitacion_1, Capacitacion_2, Mayorista_1, Mayorista_2, Minorista_1, Minorista_2,
           Comisionista_1, Comisionista_2, Dist_Zona_1, Dist_Zona_2, Enlace_1, Enlace_2, prod_er_Nivel1, prod_do_Nivel2, Pronóstico_1, Pronóstico_2,
           Adquisición_Productos_1, Adquisición_Productos_2, Inventario_1, Inventario_2, Almacenamiento_1, Almacenamiento_2, Conservación_y_preservación_de_los_productos_1,
           Conservación_y_preservación_de_los_productos_2, Picking_productos_1, Picking_productos_2]
       );
-        // Destructure mgmtData fields
-        // Destructure mgmtData fields
-        const {
-            Metas_alcanzar_org1,
-            Seleccionar1_org1,
-            Seleccionar2_org1,
-            Seleccionar3_org1,
-            Seleccionar4_org1,
-            Imposiciones_org1,
-            Metas_alcanzar_org2,
-            Seleccionar1_org2,
-            Seleccionar2_org2,
-            Seleccionar3_org2,
-            Seleccionar4_org2,
-            Imposiciones_org2,
-            Metas_alcanzar_org3,
-            Seleccionar1_org3,
-            Seleccionar2_org3,
-            Seleccionar3_org3,
-            Seleccionar4_org3,
-            Imposiciones_org3,
-            Metas_alcanzar_org4,
-            Seleccionar1_org4,
-            Seleccionar2_org4,
-            Seleccionar3_org4,
-            Seleccionar4_org4,
-            Imposiciones_org4,
-            Control_de_Gestión,
-            ControlGestión1,
-            ControlGestión2,
-            ControlGestión3,
-            ControlGestión4,
-            Asistencia_a_la_dirección,
-            Estructura_contable,
-            selection_Estructura_1,
-            selection_Estructura_2,
-            selection_Estructura_3,
-            selection_Estructura_4,
-            Coordinación_y_optimización,
-            transacciones_Seleccionar,
-            Servicio_al_Cliente_1,
-            Servicio_al_Cliente_2,
-            Servicio_al_Cliente_3,
-            Servicio_al_Cliente_4,
-            Servicio_al_Cliente_5,
-            Servicio_al_Cliente_6,
-            problemas_resueltos_Seleccionar,
-            Reuniones_con_zonas_Seleccionar,
-            Dirección_Generalestrategias_1,
-            Dirección_Generalestrategias_2,
-            Dirección_Generalestrategias_3,
-            Dirección_Generalestrategias_4,
-            Dirección_Generalestrategias_5,
-            Dirección_Generalestrategias_6,
-            politicas_nuevas_Seleccionar
-        } = req.body.mgmtData;
-
-        // Insert mgmtData fields into the managementdata table
-        await usdt1.query(
+          // Insert mgmtData fields into the managementdata table for  formtype 1
+            await usdt1.query(
             "INSERT INTO managementdata " +
             "(Metas_alcanzar_org1, Seleccionar1_org1, Seleccionar2_org1, Seleccionar3_org1, Seleccionar4_org1, Imposiciones_org1, " +
             "Metas_alcanzar_org2, Seleccionar1_org2, Seleccionar2_org2, Seleccionar3_org2, Seleccionar4_org2, Imposiciones_org2, " +
@@ -229,38 +219,62 @@ app.post('/saveData', async (req, res) => {
             Dirección_Generalestrategias_1, Dirección_Generalestrategias_2, Dirección_Generalestrategias_3, Dirección_Generalestrategias_4,
             Dirección_Generalestrategias_5, Dirección_Generalestrategias_6, politicas_nuevas_Seleccionar]
         );
+      } else if ( formtype == "form3") {
+          // Execute queries for  formtype 3
+        // Execute queries for formType 3
+            // Insert formData fields into the formdata table for formType 3
+            await usdt3.query(
+              "INSERT INTO formdata " +
+              "(name, country, email, wallet, paymentAmount, Logros, Concretados_fase_1, fase_1, Concretados, fase_2, Concretados_fase_2, " +
+              "por_llamar1, er_llamado1, por_llamar2, llamado_2do, Total_Administrativo, Pendientes, Salidas, Ingresos, zona_1, zona_2, total_zona_1, total_zona_2, " +
+              "Contratacion_1, Contratacion_2, Conflictos_1, Conflictos_2, Capacitacion_1, Capacitacion_2, Mayorista_1, Mayorista_2, Minorista_1, Minorista_2, " +
+              "Comisionista_1, Comisionista_2, Dist_Zona_1, Dist_Zona_2, Enlace_1, Enlace_2, prod_er_Nivel1, prod_do_Nivel2, Pronóstico_1, Pronóstico_2, " +
+              "Adquisición_Productos_1, Adquisición_Productos_2, Inventario_1, Inventario_2, Almacenamiento_1, Almacenamiento_2, Conservación_y_preservación_de_los_productos_1, " +
+              "Conservación_y_preservación_de_los_productos_2, Picking_productos_1, Picking_productos_2) " +
+              "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?, ?)",
+              [name, country, email, wallet, paymentAmount, Logros, Concretados_fase_1, fase_1, Concretados, fase_2, Concretados_fase_2,
+              por_llamar1, er_llamado1, por_llamar2, llamado_2do, Total_Administrativo, Pendientes, Salidas, Ingresos, zona_1, zona_2, total_zona_1, total_zona_2,
+              Contratacion_1, Contratacion_2, Conflictos_1, Conflictos_2, Capacitacion_1, Capacitacion_2, Mayorista_1, Mayorista_2, Minorista_1, Minorista_2,
+              Comisionista_1, Comisionista_2, Dist_Zona_1, Dist_Zona_2, Enlace_1, Enlace_2, prod_er_Nivel1, prod_do_Nivel2, Pronóstico_1, Pronóstico_2,
+              Adquisición_Productos_1, Adquisición_Productos_2, Inventario_1, Inventario_2, Almacenamiento_1, Almacenamiento_2, Conservación_y_preservación_de_los_productos_1,
+              Conservación_y_preservación_de_los_productos_2, Picking_productos_1, Picking_productos_2]
+          );
+              // Insert mgmtData fields into the managementdata table for  formtype 1
+                await usdt3.query(
+                "INSERT INTO managementdata " +
+                "(Metas_alcanzar_org1, Seleccionar1_org1, Seleccionar2_org1, Seleccionar3_org1, Seleccionar4_org1, Imposiciones_org1, " +
+                "Metas_alcanzar_org2, Seleccionar1_org2, Seleccionar2_org2, Seleccionar3_org2, Seleccionar4_org2, Imposiciones_org2, " +
+                "Metas_alcanzar_org3, Seleccionar1_org3, Seleccionar2_org3, Seleccionar3_org3, Seleccionar4_org3, Imposiciones_org3, " +
+                "Metas_alcanzar_org4, Seleccionar1_org4, Seleccionar2_org4, Seleccionar3_org4, Seleccionar4_org4, Imposiciones_org4, " +
+                "Control_de_Gestión, ControlGestión1, ControlGestión2, ControlGestión3, ControlGestión4, Asistencia_a_la_dirección, " +
+                "Estructura_contable, selection_Estructura_1, selection_Estructura_2, selection_Estructura_3, selection_Estructura_4, " +
+                "Coordinación_y_optimización, transacciones_Seleccionar, Servicio_al_Cliente_1, Servicio_al_Cliente_2, Servicio_al_Cliente_3, " +
+                "Servicio_al_Cliente_4, Servicio_al_Cliente_5, Servicio_al_Cliente_6, problemas_resueltos_Seleccionar, Reuniones_con_zonas_Seleccionar, " +
+                "Dirección_Generalestrategias_1, Dirección_Generalestrategias_2, Dirección_Generalestrategias_3, Dirección_Generalestrategias_4, " +
+                "Dirección_Generalestrategias_5, Dirección_Generalestrategias_6, politicas_nuevas_Seleccionar) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                [Metas_alcanzar_org1, Seleccionar1_org1, Seleccionar2_org1, Seleccionar3_org1, Seleccionar4_org1, Imposiciones_org1,
+                Metas_alcanzar_org2, Seleccionar1_org2, Seleccionar2_org2, Seleccionar3_org2, Seleccionar4_org2, Imposiciones_org2,
+                Metas_alcanzar_org3, Seleccionar1_org3, Seleccionar2_org3, Seleccionar3_org3, Seleccionar4_org3, Imposiciones_org3,
+                Metas_alcanzar_org4, Seleccionar1_org4, Seleccionar2_org4, Seleccionar3_org4, Seleccionar4_org4, Imposiciones_org4,
+                Control_de_Gestión, ControlGestión1, ControlGestión2, ControlGestión3, ControlGestión4, Asistencia_a_la_dirección,
+                Estructura_contable, selection_Estructura_1, selection_Estructura_2, selection_Estructura_3, selection_Estructura_4,
+                Coordinación_y_optimización, transacciones_Seleccionar, Servicio_al_Cliente_1, Servicio_al_Cliente_2, Servicio_al_Cliente_3,
+                Servicio_al_Cliente_4, Servicio_al_Cliente_5, Servicio_al_Cliente_6, problemas_resueltos_Seleccionar, Reuniones_con_zonas_Seleccionar,
+                Dirección_Generalestrategias_1, Dirección_Generalestrategias_2, Dirección_Generalestrategias_3, Dirección_Generalestrategias_4,
+                Dirección_Generalestrategias_5, Dirección_Generalestrategias_6, politicas_nuevas_Seleccionar]
+            );
+      } else {
+          // Handle other form types
+          throw new Error('Unsupported formType');
+      }
 
-        await usdt3.query(
-          "INSERT INTO managementdata " +
-          "(Metas_alcanzar_org1, Seleccionar1_org1, Seleccionar2_org1, Seleccionar3_org1, Seleccionar4_org1, Imposiciones_org1, " +
-          "Metas_alcanzar_org2, Seleccionar1_org2, Seleccionar2_org2, Seleccionar3_org2, Seleccionar4_org2, Imposiciones_org2, " +
-          "Metas_alcanzar_org3, Seleccionar1_org3, Seleccionar2_org3, Seleccionar3_org3, Seleccionar4_org3, Imposiciones_org3, " +
-          "Metas_alcanzar_org4, Seleccionar1_org4, Seleccionar2_org4, Seleccionar3_org4, Seleccionar4_org4, Imposiciones_org4, " +
-          "Control_de_Gestión, ControlGestión1, ControlGestión2, ControlGestión3, ControlGestión4, Asistencia_a_la_dirección, " +
-          "Estructura_contable, selection_Estructura_1, selection_Estructura_2, selection_Estructura_3, selection_Estructura_4, " +
-          "Coordinación_y_optimización, transacciones_Seleccionar, Servicio_al_Cliente_1, Servicio_al_Cliente_2, Servicio_al_Cliente_3, " +
-          "Servicio_al_Cliente_4, Servicio_al_Cliente_5, Servicio_al_Cliente_6, problemas_resueltos_Seleccionar, Reuniones_con_zonas_Seleccionar, " +
-          "Dirección_Generalestrategias_1, Dirección_Generalestrategias_2, Dirección_Generalestrategias_3, Dirección_Generalestrategias_4, " +
-          "Dirección_Generalestrategias_5, Dirección_Generalestrategias_6, politicas_nuevas_Seleccionar) " +
-          "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-          [Metas_alcanzar_org1, Seleccionar1_org1, Seleccionar2_org1, Seleccionar3_org1, Seleccionar4_org1, Imposiciones_org1,
-          Metas_alcanzar_org2, Seleccionar1_org2, Seleccionar2_org2, Seleccionar3_org2, Seleccionar4_org2, Imposiciones_org2,
-          Metas_alcanzar_org3, Seleccionar1_org3, Seleccionar2_org3, Seleccionar3_org3, Seleccionar4_org3, Imposiciones_org3,
-          Metas_alcanzar_org4, Seleccionar1_org4, Seleccionar2_org4, Seleccionar3_org4, Seleccionar4_org4, Imposiciones_org4,
-          Control_de_Gestión, ControlGestión1, ControlGestión2, ControlGestión3, ControlGestión4, Asistencia_a_la_dirección,
-          Estructura_contable, selection_Estructura_1, selection_Estructura_2, selection_Estructura_3, selection_Estructura_4,
-          Coordinación_y_optimización, transacciones_Seleccionar, Servicio_al_Cliente_1, Servicio_al_Cliente_2, Servicio_al_Cliente_3,
-          Servicio_al_Cliente_4, Servicio_al_Cliente_5, Servicio_al_Cliente_6, problemas_resueltos_Seleccionar, Reuniones_con_zonas_Seleccionar,
-          Dirección_Generalestrategias_1, Dirección_Generalestrategias_2, Dirección_Generalestrategias_3, Dirección_Generalestrategias_4,
-          Dirección_Generalestrategias_5, Dirección_Generalestrategias_6, politicas_nuevas_Seleccionar]
-      );
-        
-        console.log('Data inserted into both tables successfully');
-        res.status(200).json({ message: 'Data saved successfully' });
-    } catch (error) {
-        console.error('Error saving data:', error);
-        res.status(500).json({ error: 'Error saving data' });
-    }
+      console.log('Data inserted into both tables successfully');
+      res.status(200).json({ message: 'Data saved successfully' });
+  } catch (error) {
+      console.error('Error saving data:', error);
+      res.status(500).json({ error: 'Error saving data' });
+  }
 });
 
 
