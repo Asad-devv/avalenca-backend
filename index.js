@@ -3,8 +3,9 @@ const mysql = require("mysql2/promise"); // Import mysql2/promise for promise-ba
 const bodyParser = require("body-parser");
 var cors = require('cors')
 
+
 const app = express();
-const port = 3002;
+const port = 3001;
 app.use(cors())
 
 
