@@ -328,11 +328,11 @@ app.get("/tables", async (req, res) => {
     let connection;
     if (formType === "1") {
       sql =
-        "SELECT name, country,points,position, wallet, paymentAmount FROM usdt1.form_data ";
+        "SELECT name, country,points,position, wallet, paymentAmount FROM usdt1.form_data LIMIT 100";
       connection = usdt1;
     } else if (formType === "3") {
       sql =
-        "SELECT name, country,points,position ,wallet, paymentAmount FROM usdt3.form_data";
+        "SELECT name, country,points,position ,wallet, paymentAmount FROM usdt3.form_data LIMIT 100";
       connection = usdt3;
     } else {
       throw new Error("Invalid form type");
